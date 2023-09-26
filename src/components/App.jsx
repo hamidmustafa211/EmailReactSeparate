@@ -5,6 +5,7 @@ import Screen3 from "./Screen3";
 import Screen4 from "./Screen4";
 import MenuButton from "./MenuButton";
 import { Link, Route, Routes } from "react-router-dom";
+import GenerateMailScreen from "./GenerateMailScreen";
 function App() {
   return (
     <div className="bg-gray-900 m-0 p-0 font-body">
@@ -39,6 +40,7 @@ function App() {
         <Route path="/reply-mail" element={<Screen2 />}></Route>
         <Route path="/prompts" element={<Screen3 />}></Route>
         <Route path="/tools" element={<Screen4 />}></Route>
+        <Route path="/generate-mail" element={<GenerateMailScreen />}></Route>
       </Routes>
     </div>
   );
