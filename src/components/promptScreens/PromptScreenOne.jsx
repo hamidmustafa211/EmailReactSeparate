@@ -1,8 +1,7 @@
 import React from "react";
 import Input from "../Input";
 import Button from "../Button";
-
-function PromptScreen5() {
+function PromptScreenOne() {
   return (
     <div className="h-screen p-7">
       <div class="ml-[300px] m-3"></div>
@@ -17,4 +16,4 @@ function PromptScreen5() {
   );
 }
 
-export default PromptScreen5;
+export default PromptScreenOne;

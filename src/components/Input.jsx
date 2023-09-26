@@ -5,7 +5,7 @@ function Input(props) {
     <div>
       <div class="ml-[300px] m-3">
         <div
-          class={`bg-slate-800 ${props.divheight} w-11/12 rounded-lg pt-1 ml-8`}
+          class={`bg-slate-800 ${props.divheight} w-11/12 rounded-lg pt-1 ml-4`}
         >
           <div>
             <label class="font-semibold text-white text-sm ml-4" for="">
