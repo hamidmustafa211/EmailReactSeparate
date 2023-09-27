@@ -15,6 +15,8 @@ function Input(props) {
 
           <div>
             <textarea
+              id={props.id}
+              value={props.value}
               class="outline-none ml-4 bg-slate-800 resize-none mt-1 text-white text-sm"
               placeholder={props.placeholder}
               cols={props.cols}

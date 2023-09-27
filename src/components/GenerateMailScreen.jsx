@@ -1,6 +1,9 @@
 import React from "react";
 import Input from "./Input";
 import Button from "./Button";
+// //
+
+//  //
 function GenerateMailScreen() {
   return (
     <div className="h-screen p-7 ">
