@@ -31,8 +31,10 @@ import Input from "./Input";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
+import dotenv from "dotenv";
+dotenv.config();
 
-const apiKey = "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";
+const apiKey = process.env.REACT_APP_API_KEY;
 
 function GenerateMailScreen({ initialRows = 20, initialValue = "" }) {
   const [userMessage, setUserMessage] = useState("");
