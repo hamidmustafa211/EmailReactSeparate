@@ -10,7 +10,7 @@ function Screen1() {
         </div>
         <div class="flex justify-center">
           <Link to="/generate-mail">
-            <button class="bg-custom-blue rounded-md text-slate-50 px-52 py-2.5 font-bold hover:text-slate-400 duration-150 select-none">
+            <button class="bg-custom-blue m-4 rounded-md text-slate-50 px-52 py-2.5 font-bold hover:text-slate-400 duration-150 select-none">
               Generate Ai Email
             </button>
           </Link>

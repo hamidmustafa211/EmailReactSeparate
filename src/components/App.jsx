@@ -17,6 +17,7 @@ import ToolsScreen2 from "./toolsScreens/ToolsScreen2";
 import ToolsScreen3 from "./toolsScreens/ToolsScreen3";
 import ToolsScreen4 from "./toolsScreens/ToolsScreen4";
 import ToolsScreen5 from "./toolsScreens/ToolsScreen5";
+import EmailScreen from "./EmailScreen";
 import MenuButton from "./MenuButton";
 import { Link, Route, Routes } from "react-router-dom";
 
@@ -63,6 +64,7 @@ function App() {
         <Route path="/cover-letter" element={<PromptScreen6 />}></Route>
         <Route path="/arrange-meeting" element={<PromptScreen7 />}></Route>
         <Route path="/data-plan" element={<PromptScreen8 />}></Route>
+        <Route path="/email" element={<EmailScreen />}></Route>
         <Route
           path="/personalized-cold-email"
           element={<ToolsScreen1 />}
