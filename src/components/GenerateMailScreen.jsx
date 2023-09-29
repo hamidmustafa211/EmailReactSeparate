@@ -31,8 +31,8 @@ import Input from "./Input";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const apiKey = process.env.REACT_APP_API_KEY;
 

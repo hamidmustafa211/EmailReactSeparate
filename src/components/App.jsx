@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Screen1 from "./Screen1";
 import Screen2 from "./Screen2";
 import Screen3 from "./Screen3";
@@ -22,6 +22,24 @@ import MenuButton from "./MenuButton";
 import { Link, Route, Routes } from "react-router-dom";
 
 function App() {
+  const [activeButton, setActiveButton] = useState(0);
+  function handleButtonClick(id) {
+    setActiveButton(id);
+  }
+
+  const buttonsData = [
+    { id: 0, text: "Write Mail", image: "/Images/copy-writing.png", to: "/" },
+    {
+      id: 1,
+      text: "Reply Mail",
+      image: "/Images/share.png",
+      to: "/reply-mail",
+    },
+    { id: 2, text: "Prompts", image: "/Images/magic.png", to: "/prompts" },
+    { id: 3, text: "Tools", image: "/Images/tools.png", to: "/tools" },
+    // Add more button data as needed
+  ];
+
   return (
     <div className="bg-gray-900 m-0 p-0 font-body">
       <div class="">
@@ -32,21 +50,50 @@ function App() {
               <img class="w-56" src="/Images/logo.png" alt="" />
             </div>
           </div>
-
-          {/* <!-- menu buttons start --> */}
-
+          {buttonsData.map((button) => (
+            <Link to={button.to}>
+              <MenuButton
+                text={button.text}
+                image={button.image}
+                isActive={activeButton === button.id}
+                onClick={() => handleButtonClick(button.id)}
+              />
+            </Link>
+          ))}
+          ;{/* <!-- menu buttons Manual way --> */}
+          {/* 
           <Link to="/">
-            <MenuButton text="Write Mail" image="/Images/copy-writing.png" />
+            <MenuButton
+              onClick={() => handleButtonClick(0)}
+              isActive={activeButton === 0}
+              text="Write Mail"
+              image="/Images/copy-writing.png"
+            />
           </Link>
           <Link to="/reply-mail">
-            <MenuButton text="Reply Mail" image="/Images/share.png" />
+            <MenuButton
+              onClick={() => handleButtonClick(1)}
+              isActive={activeButton === 1}
+              text="Reply Mail"
+              image="/Images/share.png"
+            />
           </Link>
           <Link to="/prompts">
-            <MenuButton text="Prompts" image="/Images/magic.png" />
+            <MenuButton
+              onClick={() => handleButtonClick(2)}
+              isActive={activeButton === 2}
+              text="Prompts"
+              image="/Images/magic.png"
+            />
           </Link>
           <Link to="/tools">
-            <MenuButton text="Tools" image="/Images/tools.png" />
-          </Link>
+            <MenuButton
+              onClick={() => handleButtonClick(3)}
+              isActive={activeButton === 3}
+              text="Tools"
+              image="/Images/tools.png"
+            />
+          </Link> */}
         </div>
       </div>
       {/* Routes */}
