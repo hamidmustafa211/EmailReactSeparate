@@ -19,9 +19,11 @@ import ToolsScreen4 from "./toolsScreens/ToolsScreen4";
 import ToolsScreen5 from "./toolsScreens/ToolsScreen5";
 import EmailScreen from "./EmailScreen";
 import MenuButton from "./MenuButton";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
   const [activeButton, setActiveButton] = useState(0);
   function handleButtonClick(id) {
     setActiveButton(id);
@@ -97,30 +99,35 @@ function App() {
         </div>
       </div>
       {/* Routes */}
-      <Routes>
-        <Route path="/" element={<Screen1 />}></Route>
-        <Route path="/reply-mail" element={<Screen2 />}></Route>
-        <Route path="/prompts" element={<Screen3 />}></Route>
-        <Route path="/tools" element={<Screen4 />}></Route>
-        <Route path="/generate-mail" element={<GenerateMailScreen />}></Route>
-        <Route path="/day-of-request" element={<PromptScreenOne />}></Route>
-        <Route path="/birthday" element={<PromptScreen2 />}></Route>
-        <Route path="/being-late-for-work" element={<PromptScreen3 />}></Route>
-        <Route path="/pay-increases" element={<PromptScreen4 />}></Route>
-        <Route path="/resgination-letter" element={<PromptScreen5 />}></Route>
-        <Route path="/cover-letter" element={<PromptScreen6 />}></Route>
-        <Route path="/arrange-meeting" element={<PromptScreen7 />}></Route>
-        <Route path="/data-plan" element={<PromptScreen8 />}></Route>
-        <Route path="/email" element={<EmailScreen />}></Route>
-        <Route
-          path="/personalized-cold-email"
-          element={<ToolsScreen1 />}
-        ></Route>
-        <Route path="/fix-grammer" element={<ToolsScreen2 />}></Route>
-        <Route path="/email-subjectline" element={<ToolsScreen3 />}></Route>
-        <Route path="/question-from-email" element={<ToolsScreen4 />}></Route>
-        <Route path="/create-summary" element={<ToolsScreen5 />}></Route>
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes key={location.pathname} location={location}>
+          <Route path="/" element={<Screen1 />}></Route>
+          <Route path="/reply-mail" element={<Screen2 />}></Route>
+          <Route path="/prompts" element={<Screen3 />}></Route>
+          <Route path="/tools" element={<Screen4 />}></Route>
+          <Route path="/generate-mail" element={<GenerateMailScreen />}></Route>
+          <Route path="/day-of-request" element={<PromptScreenOne />}></Route>
+          <Route path="/birthday" element={<PromptScreen2 />}></Route>
+          <Route
+            path="/being-late-for-work"
+            element={<PromptScreen3 />}
+          ></Route>
+          <Route path="/pay-increases" element={<PromptScreen4 />}></Route>
+          <Route path="/resgination-letter" element={<PromptScreen5 />}></Route>
+          <Route path="/cover-letter" element={<PromptScreen6 />}></Route>
+          <Route path="/arrange-meeting" element={<PromptScreen7 />}></Route>
+          <Route path="/data-plan" element={<PromptScreen8 />}></Route>
+          <Route path="/email" element={<EmailScreen />}></Route>
+          <Route
+            path="/personalized-cold-email"
+            element={<ToolsScreen1 />}
+          ></Route>
+          <Route path="/fix-grammer" element={<ToolsScreen2 />}></Route>
+          <Route path="/email-subjectline" element={<ToolsScreen3 />}></Route>
+          <Route path="/question-from-email" element={<ToolsScreen4 />}></Route>
+          <Route path="/create-summary" element={<ToolsScreen5 />}></Route>
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }

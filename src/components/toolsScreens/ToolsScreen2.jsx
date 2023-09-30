@@ -1,7 +1,6 @@
 import React from "react";
 import Input from "../Input";
 import Button from "../Button";
-
 function ToolsScreen2() {
   return (
     <div className="h-screen p-7">

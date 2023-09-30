@@ -1,6 +1,8 @@
 import React from "react";
 import ToolsButton from "./ToolsButton";
 import { Link } from "react-router-dom";
+import AnimatedPages from "./AnimatedPages";
+
 function Screen4(props) {
   const toolsArray = [
     {
@@ -35,21 +37,23 @@ function Screen4(props) {
     },
   ];
   return (
-    <div className="h-screen p-7 ml-[280px]">
-      <div className="grid grid-cols-3 grid-rows-2 gap-3 ml-10 mr-10">
-        {toolsArray.map((tool) => {
-          return (
-            <Link to={tool.to}>
-              <ToolsButton
-                image={tool.image}
-                heading={tool.heading}
-                paragraph={tool.paragraph}
-              />
-            </Link>
-          );
-        })}
+    <AnimatedPages>
+      <div className="h-screen p-7 ml-[280px]">
+        <div className="grid grid-cols-3 grid-rows-2 gap-3 ml-10 mr-10">
+          {toolsArray.map((tool) => {
+            return (
+              <Link to={tool.to}>
+                <ToolsButton
+                  image={tool.image}
+                  heading={tool.heading}
+                  paragraph={tool.paragraph}
+                />
+              </Link>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </AnimatedPages>
   );
 }
 

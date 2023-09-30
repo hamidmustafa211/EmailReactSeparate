@@ -31,6 +31,7 @@ import Input from "./Input";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
+import AnimatedPages from "./AnimatedPages";
 // import dotenv from "dotenv";
 // dotenv.config();
 
@@ -109,43 +110,55 @@ function GenerateMailScreen({ initialRows = 20, initialValue = "" }) {
   useEffect(() => {
     setUserMessage(initialValue);
   }, [initialValue]);
-  return (
-    <div className="h-screen p-7 ">
-      {isDivVisible ? (
-        <div>
-          <div className="ml-[300px] m-3">
-            <h2 className="text-white font-bold mb-4 ml-7 text-xl">
-              Writing Email
-            </h2>
-          </div>
-          <Input
-            label="Enter Text here"
-            cols="160"
-            rows={initialRows}
-            placeholder="Tell us what you want to convey in your email. Type or use your voice to provide instructions, and our AI will create the perfect message."
-            value={userMessage}
-            onChange={(event) => setUserMessage(event.target.value)} //
-          />
-          <Link>
-            <Button text="Submit" onClick={handleClick} />
-          </Link>
-        </div>
-      ) : null}
 
-      <div>
-        {chatHistory.map((message, index) => (
-          <div
-            key={index}
-            className="ml-[300px] text-white chat-message chat-message"
-          >
-            {message.content}
+  return (
+    <AnimatedPages>
+      <div className="min-h-screen p-7">
+        {isDivVisible ? (
+          <div>
+            <div className="ml-[300px] m-3">
+              <h2 className="text-white font-bold mb-4 ml-7 text-xl">
+                Writing Email
+              </h2>
+            </div>
+            <Input
+              label="Enter Text here"
+              cols="160"
+              rows={initialRows}
+              placeholder="Tell us what you want to convey in your email. Type or use your voice to provide instructions, and our AI will create the perfect message."
+              value={userMessage}
+              onChange={(event) => setUserMessage(event.target.value)} //
+            />
+            {userMessage ? (
+              <Link>
+                <Button text="Submit" onClick={handleClick} />
+              </Link>
+            ) : (
+              <Button
+                text="Submit"
+                onClick={() => alert("Please Type Something")}
+              />
+            )}
           </div>
-        ))}
-        <div className=" absolute inset-y-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {isLoading ? <LoadingSpinner /> : null}
+        ) : null}
+
+        <div>
+          {chatHistory.map((message, index) => (
+            <div
+              key={index}
+              className={`ml-[330px] mr-14 mt-5 text-white chat-message chat-message bg-gray-800  rounded-lg  ${
+                isLoading ? null : " p-3 "
+              }`}
+            >
+              {message.content}
+            </div>
+          ))}
+          <div className=" absolute inset-y-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            {isLoading ? <LoadingSpinner /> : null}
+          </div>
         </div>
       </div>
-    </div>
+    </AnimatedPages>
   );
 }
 
