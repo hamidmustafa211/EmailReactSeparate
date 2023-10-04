@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import Screen1 from "./Screen1";
 import Screen2 from "./Screen2";
 import Screen3 from "./Screen3";
@@ -21,8 +21,10 @@ import EmailScreen from "./EmailScreen";
 import MenuButton from "./MenuButton";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+export const AppContext = createContext();
 
 function App() {
+  const [email, setEmail] = useState([]);
   const location = useLocation();
   const [activeButton, setActiveButton] = useState(0);
   function handleButtonClick(id) {
@@ -62,71 +64,48 @@ function App() {
               />
             </Link>
           ))}
-          ;{/* <!-- menu buttons Manual way --> */}
-          {/* 
-          <Link to="/">
-            <MenuButton
-              onClick={() => handleButtonClick(0)}
-              isActive={activeButton === 0}
-              text="Write Mail"
-              image="/Images/copy-writing.png"
-            />
-          </Link>
-          <Link to="/reply-mail">
-            <MenuButton
-              onClick={() => handleButtonClick(1)}
-              isActive={activeButton === 1}
-              text="Reply Mail"
-              image="/Images/share.png"
-            />
-          </Link>
-          <Link to="/prompts">
-            <MenuButton
-              onClick={() => handleButtonClick(2)}
-              isActive={activeButton === 2}
-              text="Prompts"
-              image="/Images/magic.png"
-            />
-          </Link>
-          <Link to="/tools">
-            <MenuButton
-              onClick={() => handleButtonClick(3)}
-              isActive={activeButton === 3}
-              text="Tools"
-              image="/Images/tools.png"
-            />
-          </Link> */}
         </div>
       </div>
       {/* Routes */}
       <AnimatePresence mode="wait">
-        <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<Screen1 />}></Route>
-          <Route path="/reply-mail" element={<Screen2 />}></Route>
-          <Route path="/prompts" element={<Screen3 />}></Route>
-          <Route path="/tools" element={<Screen4 />}></Route>
-          <Route path="/generate-mail" element={<GenerateMailScreen />}></Route>
-          <Route path="/day-of-request" element={<PromptScreenOne />}></Route>
-          <Route path="/birthday" element={<PromptScreen2 />}></Route>
-          <Route
-            path="/being-late-for-work"
-            element={<PromptScreen3 />}
-          ></Route>
-          <Route path="/pay-increases" element={<PromptScreen4 />}></Route>
-          <Route path="/resgination-letter" element={<PromptScreen5 />}></Route>
-          <Route path="/cover-letter" element={<PromptScreen6 />}></Route>
-          <Route path="/arrange-meeting" element={<PromptScreen7 />}></Route>
-          <Route path="/data-plan" element={<PromptScreen8 />}></Route>
-          <Route path="/email" element={<EmailScreen />}></Route>
-          <Route
-            path="/personalized-cold-email"
-            element={<ToolsScreen1 />}
-          ></Route>
-          <Route path="/fix-grammer" element={<ToolsScreen2 />}></Route>
-          <Route path="/email-subjectline" element={<ToolsScreen3 />}></Route>
-          <Route path="/question-from-email" element={<ToolsScreen4 />}></Route>
-          <Route path="/create-summary" element={<ToolsScreen5 />}></Route>
-        </Routes>
+        <AppContext.Provider value={{ email, setEmail }}>
+          <Routes key={location.pathname} location={location}>
+            <Route path="/" element={<Screen1 />}></Route>
+            <Route path="/reply-mail" element={<Screen2 />}></Route>
+            <Route path="/prompts" element={<Screen3 />}></Route>
+            <Route path="/tools" element={<Screen4 />}></Route>
+            <Route
+              path="/generate-mail"
+              element={<GenerateMailScreen />}
+            ></Route>
+            <Route path="/day-of-request" element={<PromptScreenOne />}></Route>
+            <Route path="/birthday" element={<PromptScreen2 />}></Route>
+            <Route
+              path="/being-late-for-work"
+              element={<PromptScreen3 />}
+            ></Route>
+            <Route path="/pay-increases" element={<PromptScreen4 />}></Route>
+            <Route
+              path="/resgination-letter"
+              element={<PromptScreen5 />}
+            ></Route>
+            <Route path="/cover-letter" element={<PromptScreen6 />}></Route>
+            <Route path="/arrange-meeting" element={<PromptScreen7 />}></Route>
+            <Route path="/data-plan" element={<PromptScreen8 />}></Route>
+            <Route path="/email" element={<EmailScreen />}></Route>
+            <Route
+              path="/personalized-cold-email"
+              element={<ToolsScreen1 />}
+            ></Route>
+            <Route path="/fix-grammer" element={<ToolsScreen2 />}></Route>
+            <Route path="/email-subjectline" element={<ToolsScreen3 />}></Route>
+            <Route
+              path="/question-from-email"
+              element={<ToolsScreen4 />}
+            ></Route>
+            <Route path="/create-summary" element={<ToolsScreen5 />}></Route>
+          </Routes>
+        </AppContext.Provider>
       </AnimatePresence>
     </div>
   );

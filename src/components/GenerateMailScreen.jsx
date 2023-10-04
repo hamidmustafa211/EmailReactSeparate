@@ -1,37 +1,11 @@
-// import React from "react";
-// import Input from "./Input";
-// import Button from "./Button";
-
-// function GenerateMailScreen() {
-//   //
-
-//   //
-//   return (
-//     <div className="h-screen p-7 ">
-//       <div class="ml-[300px] m-3">
-//         <h2 class="text-white font-bold mb-4 ml-7 text-xl">Writing Email</h2>
-//       </div>
-//       <Input
-//         id="messageInput"
-//         label="Enter Text here"
-//         cols="160"
-//         rows="20"
-//         placeholder="Tell us what you want to convey in your email. Type or use you voice to provide instructions, and our Ai will create the perfect message."
-//       />
-//       <Button id="sendMessageButton" text="Submit" />
-//       <div id="chatMessages"></div>
-//     </div>
-//   );
-// }
-
-// export default GenerateMailScreen;
-
 import React, { useState, useEffect } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 import AnimatedPages from "./AnimatedPages";
+import { useContext } from "react";
+import { AppContext } from "./App";
 // import dotenv from "dotenv";
 // dotenv.config();
 
@@ -40,6 +14,8 @@ const apiKey = process.env.REACT_APP_API_KEY;
 function GenerateMailScreen({ initialRows = 20, initialValue = "" }) {
   const [userMessage, setUserMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
+  const [savedResponses, setSavedResponses] = useState([]);
+  const { email, setEmail } = useContext(AppContext);
 
   const sendMessage = async () => {
     if (userMessage.trim() === "") return;
@@ -111,6 +87,17 @@ function GenerateMailScreen({ initialRows = 20, initialValue = "" }) {
     setUserMessage(initialValue);
   }, [initialValue]);
 
+  // function handleSavedResponse(message) {
+  //   if (message.content) {
+  //     setSavedResponces([...savedResponses, message]);
+  //   }
+  // }
+  function handleSavedResponse(message) {
+    if (message.content) {
+      setEmail([...email, message.content]);
+    }
+  }
+
   return (
     <AnimatedPages>
       <div className="min-h-screen p-7">
@@ -151,8 +138,33 @@ function GenerateMailScreen({ initialRows = 20, initialValue = "" }) {
               }`}
             >
               {message.content}
+              {/* {console.log(message)} */}
+              {message.content ? (
+                <Button
+                  onClick={() => handleSavedResponse(message)}
+                  class=" ml-[0px] mt-5"
+                  text="Save"
+                ></Button>
+              ) : null}
             </div>
           ))}
+          {/*  */}
+          <div className="mt-5">
+            <h2 className="text-white font-bold mb-2 text-xl">
+              Saved Responses
+            </h2>
+            {savedResponses.map((response, index) => (
+              <div
+                key={index}
+                className="ml-[300px] text-white bg-gray-800 rounded-lg p-3 mt-2"
+              >
+                {setEmail([...email, response.content])}
+
+                {/* {setEmail([...email, response.content])} */}
+              </div>
+            ))}
+          </div>
+          {/*  */}
           <div className=" absolute inset-y-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             {isLoading ? <LoadingSpinner /> : null}
           </div>

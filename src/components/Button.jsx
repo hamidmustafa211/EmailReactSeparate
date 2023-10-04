@@ -3,7 +3,9 @@ import React from "react";
 function Button(props) {
   return (
     <div>
-      <div class="flex justify-center gap-x-2 mt-3 ml-[300px]">
+      <div
+        class={`flex justify-center gap-x-2 mt-3 ml-[300px] ${props.class} `}
+      >
         <button
           onClick={props.onClick}
           id={props.id}
